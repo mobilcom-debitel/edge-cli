@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 var debug = require( 'debug' )( 'edge-cli:index' );
-var dispatch = require( './lib/dispatch' );
+var dispatch = require( '../lib/dispatch' );
 
 var args = process.argv.slice( process.argv[ 0 ].match( /edge/ ) ? 1 : 2 );
 debug( args );
