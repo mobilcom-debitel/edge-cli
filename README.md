@@ -5,6 +5,8 @@ organization/environment resource files and target servers.
 Use with caution.
 
 ```
+// writes config to a .edge config file (working directory)
+// you can also export EDGE_URL, EDGE_USER, EDGE_PASSWORD
 edge config <baseUrl> <user> <password>
 
 // organization resource files
