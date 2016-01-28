@@ -9,7 +9,7 @@
   "author": "Morris Brodersen",
   "license": "ISC",
   "bin": {
-    "mocha": "./bin/edge"
+    "edge": "./bin/edge"
   },
   "dependencies": {
     "debug": "^2.2.0",
