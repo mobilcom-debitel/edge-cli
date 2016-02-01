@@ -19,7 +19,6 @@ edge config user <user>
 edge config password <password>
 
 // organization resource files
-// list files
 edge o/<org>/r
 edge o/<org>/r/<type>
 edge o/<org>/r/<type>/<name>
