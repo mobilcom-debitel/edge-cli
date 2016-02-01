@@ -14,7 +14,9 @@ to make `edge` available in your PATH.
 ```
 // writes config to a .edge config file (working directory)
 // you can also export EDGE_URL, EDGE_USER, EDGE_PASSWORD
-edge config <baseUrl> <user> <password>
+edge config url <baseUrl>
+edge config user <user>
+edge config password <password>
 
 // organization resource files
 // list files

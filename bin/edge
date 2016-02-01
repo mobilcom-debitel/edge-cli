@@ -14,7 +14,9 @@ dispatch( args ).catch( function ( err ) {
 } );
 
 function usage() {
-  console.log( 'edge config <baseUrl> <user> <password>' );
+  console.log( 'edge config url <url>' );
+  console.log( 'edge config user <user>' );
+  console.log( 'edge config password <password>' );
   console.log( 'edge o/<org>/e/<env>/r' );
   console.log( 'edge o/<org>/e/<env>/r/<type>/<name>' );
   console.log( 'edge o/<org>/e/<env>/r/<type>/<name> upload <source>' );
