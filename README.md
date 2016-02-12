@@ -38,3 +38,25 @@ edge o/<org>/e/<env>/t/<name>
 edge o/<org>/e/<env>/t/<name> upload <source>
 edge o/<org>/e/<env>/t/<name> delete
 ```
+
+## Examples
+
+```
+// this is the base management api url for the test environment
+edge config url http://apiproxy-admin-test:8080
+
+// to get the target servers of organization 'md' and environment 'test-online'
+edge o/md/e/test-online/t
+
+// to create a new target server
+edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
+
+// with gen_chathistory_0.json being
+{
+  "host" : "unknown",
+  "isEnabled" : false,
+  "name" : "GEN_CHATHISTORY_0",
+  "port" : 9000
+}
+```
+
