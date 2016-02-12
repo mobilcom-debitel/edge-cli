@@ -14,6 +14,7 @@ to make `edge` available in your PATH.
 ```
 // writes config to a .edge config file (working directory)
 // you can also export EDGE_URL, EDGE_USER, EDGE_PASSWORD
+// NOTE: Remember to add .edge to your .gitignore
 edge config url <baseUrl>
 edge config user <user>
 edge config password <password>
