@@ -62,3 +62,8 @@ edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
 ## Tests
 
 To run the tests you need a real (dev) config set up using `edge config ...`.
+You have to export `EDGE_CLI_TEST` when running the tests:
+
+```
+EDGE_CLI_TEST=o/md/e/dev-online npm test
+```

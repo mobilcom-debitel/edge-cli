@@ -6,6 +6,8 @@ var writeFile = require( '../lib/writeFile' );
 
 describe( 'The Edge CLI', function () {
 
+  this.timeout( 20000 ); // dafuq apigee
+
   it( 'should report a missing action', function ( done ) {
 
     cli.dispatch( [] )
@@ -31,6 +33,33 @@ describe( 'The Edge CLI', function () {
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
         assert.equal( err.message, 'Missing action' );
+      } )
+      .then( done, done );
+
+  } );
+
+  it( 'should manage target servers', function ( done ) {
+
+    var t = process.env.EDGE_CLI_TEST + '/t';
+
+    cli.dispatch( [ t + '/edge_cli_test', 'upload', './test/edge_cli_test.xml' ] )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ t ] );
+      } )
+      .then( function ( list ) {
+        assert.ok( list.match( /edge_cli_test/ ) );
+      } )
+      .then( function () {
+        return cli.dispatch( [ t + '/edge_cli_test', 'delete' ] );
+      } )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ t ] );
+      } )
+      .then( function ( list ) {
+        console.log( list );
+        assert.ok( !list.match( /edge_cli_test/ ) );
       } )
       .then( done, done );
 
