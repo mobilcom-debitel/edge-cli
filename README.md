@@ -58,3 +58,7 @@ edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
   "port" : 9000
 }
 ```
+
+## Tests
+
+To run the tests you need a real (dev) config set up using `edge config ...`.

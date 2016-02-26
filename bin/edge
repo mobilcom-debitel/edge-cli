@@ -2,8 +2,10 @@
 
 var cli = require( '../' );
 
-cli.dispatch( process.argv ).catch( function ( err ) {
+cli.dispatch( process.argv ).then( function ( output ) {
+  console.log( output );
+} ).catch( function ( err ) {
   console.error( err.message );
-  cli.usage();
+  console.error( cli.usage() );
   process.exit( 1 );
 } );
