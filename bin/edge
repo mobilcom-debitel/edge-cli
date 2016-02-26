@@ -1,28 +1,9 @@
 #!/usr/bin/env node
 
-var debug = require( 'debug' )( 'edge-cli:index' );
-var dispatch = require( '../lib/dispatch' );
+var cli = require( '../' );
 
-var args = process.argv.slice( process.argv[ 0 ].match( /edge/ ) ? 1 : 2 );
-debug( args );
-
-dispatch( args ).catch( function ( err ) {
+cli.dispatch( process.argv ).catch( function ( err ) {
   console.error( err.message );
-  debug( err.stack );
-  usage();
+  cli.usage();
   process.exit( 1 );
 } );
-
-function usage() {
-  console.log( 'edge config url <url>' );
-  console.log( 'edge config user <user>' );
-  console.log( 'edge config password <password>' );
-  console.log( 'edge o/<org>/e/<env>/r' );
-  console.log( 'edge o/<org>/e/<env>/r/<type>/<name>' );
-  console.log( 'edge o/<org>/e/<env>/r/<type>/<name> upload <source>' );
-  console.log( 'edge o/<org>/e/<env>/r/<type>/<name> delete' );
-  console.log( 'edge o/<org>/e/<env>/t' );
-  console.log( 'edge o/<org>/e/<env>/t/<name>' );
-  console.log( 'edge o/<org>/e/<env>/t/<name> upload <source>' );
-  console.log( 'edge o/<org>/e/<env>/t/<name> delete' );
-}

@@ -2,9 +2,9 @@
   "name": "edge-cli",
   "version": "0.1.0",
   "description": "Apigee Edge Command Line Interface",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test"
   },
   "author": "Morris Brodersen",
   "license": "ISC",
@@ -16,5 +16,9 @@
     "object-assign": "^4.0.1",
     "q": "^1.4.1",
     "request": "^2.67.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5"
   }
 }

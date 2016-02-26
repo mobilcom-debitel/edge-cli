@@ -2,7 +2,6 @@
 
 A CLI with support for features missing in the Edge UI like managing
 organization/environment resource files and target servers.
-Use with caution.
 
 ## Installation
 
@@ -59,4 +58,3 @@ edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
   "port" : 9000
 }
 ```
-
