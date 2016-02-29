@@ -34,7 +34,7 @@ edge o/<org>/e/<env>/r/<type>/<name> delete
 // environment target servers
 edge o/<org>/e/<env>/t
 edge o/<org>/e/<env>/t/<name>
-edge o/<org>/e/<env>/t/<name> upload <source>
+edge o/<org>/e/<env>/t/<name> upload <source> // source may be .xml or .json
 edge o/<org>/e/<env>/t/<name> delete
 ```
 
@@ -52,12 +52,21 @@ edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
 
 // with gen_chathistory_0.json being
 {
-  "host" : "unknown",
+  "host" : "xxxx",
   "isEnabled" : false,
   "name" : "GEN_CHATHISTORY_0",
   "port" : 9000
 }
+
+// xml works as well
+<TargetServer name="GEN_CHATHISTORY_0">
+  <Host>xxxx</Host>
+  <Port>9000</Port>
+  <IsEnabled>false</IsEnabled>
+</TargetServer>
 ```
+
+See [Load balancing across backend servers (Apigee)]( http://docs.apigee.com/docs/api-services/content/api-services/content/load-balancing-across-backend-servers) for details on target servers.
 
 ## Tests
 
