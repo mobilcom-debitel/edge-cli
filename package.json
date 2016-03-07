@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "istanbul": "^0.4.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "xunit-file": "0.0.9"
   }
 }
