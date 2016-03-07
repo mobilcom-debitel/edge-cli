@@ -6,13 +6,15 @@ var writeFile = require( '../lib/writeFile' );
 
 describe( 'The Edge CLI', function () {
 
+  var account = process.env.EDGE_CLI_TEST;
+
   this.timeout( 20000 ); // dafuq apigee
 
   it( 'should report a missing action', function ( done ) {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing action' );
+        assert.equal( err.message, 'Missing account' );
       } )
       .then( done, done );
 
@@ -22,7 +24,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing action' );
+        assert.equal( err.message, 'Missing account' );
       } )
       .then( done, done );
 
@@ -32,7 +34,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'node', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing action' );
+        assert.equal( err.message, 'Missing account' );
       } )
       .then( done, done );
 
@@ -42,7 +44,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'C:\\foo\\bar\\node.exe', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing action' );
+        assert.equal( err.message, 'Missing account' );
       } )
       .then( done, done );
 
@@ -50,32 +52,30 @@ describe( 'The Edge CLI', function () {
 
   it( 'should manage target servers', function ( done ) {
 
-    var t = process.env.EDGE_CLI_TEST + '/t';
-
-    cli.dispatch( [ 'edge', t + '/edge_cli_test', 'upload', './test/edge_cli_test.xml' ] )
+    cli.dispatch( [ 'edge', account, 'targetServers', 'deploy', './test/edge_cli_test.xml', 'edge_cli_test' ] )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', t ] );
+        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( list.match( /edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', t + '/edge_cli_test', 'upload', './test/edge_cli_test.json' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServers', 'deploy', './test/edge_cli_test.json', 'edge_cli_test' ] );
       } )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', t ] );
+        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( list.match( /edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', t + '/edge_cli_test', 'delete' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServers', 'delete', 'edge_cli_test' ] );
       } )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', t ] );
+        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( !list.match( /edge_cli_test/ ) );
@@ -84,25 +84,37 @@ describe( 'The Edge CLI', function () {
 
   } );
 
-  describe( '(without config)', function () {
+  it( 'should manage resources', function ( done ) {
 
-    var restore;
+    cli.dispatch( [ 'edge', account, 'resources', 'deploy', './test/edge_cli_test.jsc', 'jsc/edge_cli_test.js' ] )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ 'edge', account, 'resources', 'list' ] );
+      } )
+      .then( function ( list ) {
+        assert.ok( list.match( /jsc\/edge_cli_test/ ) );
+      } )
+      .then( function () {
+        return cli.dispatch( [ 'edge', account, 'resources', 'delete', 'jsc/edge_cli_test.js' ] );
+      } )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ 'edge', account, 'resources', 'list' ] );
+      } )
+      .then( function ( list ) {
+        assert.ok( !list.match( /jsc\/edge_cli_test/ ) );
+      } )
+      .then( done, done );
 
-    before( function ( done ) {
+  } );
 
-      readFile( './.edge' )
-        .then( function ( contents ) {
-          restore = contents;
-          fs.unlink( './.edge', done() );
-        }, done );
+  describe( '(with mock account)', function () {
 
-    } );
+    it( 'should report a missing org', function ( done ) {
 
-    it( 'should report a missing URL', function ( done ) {
-
-      cli.dispatch( [ 'edge', 'o/uhm/r' ] )
+      cli.dispatch( [ 'edge', 'mrx', 'targetServers', 'list' ] )
         .then( not( done ), function ( err ) {
-          assert.equal( err.message, 'Missing configuration: url' );
+          assert.equal( err.message, 'Missing organization' );
         } )
         .then( done, done );
 
@@ -110,20 +122,16 @@ describe( 'The Edge CLI', function () {
 
     it( 'should configure', function ( done ) {
 
-      cli.dispatch( [ 'edge', 'config', 'url', 'foo' ] )
+      cli.dispatch( [ 'edge', 'mocha', 'config', 'set', 'url', 'foo' ] )
         .then( ok )
         .then( function () {
-          return cli.dispatch( [ 'edge', 'config', 'url' ] );
+          return cli.dispatch( [ 'edge', 'mocha', 'config', 'get', 'url' ] );
         } )
         .then( function ( url ) {
           assert.equal( url, 'foo' );
         } )
         .then( done, done );
 
-    } );
-
-    after( function ( done ) {
-      writeFile( './.edge', restore ).then( done, done );
     } );
 
   } );
