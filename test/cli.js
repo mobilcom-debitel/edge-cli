@@ -52,30 +52,30 @@ describe( 'The Edge CLI', function () {
 
   it( 'should manage target servers', function ( done ) {
 
-    cli.dispatch( [ 'edge', account, 'targetServers', 'deploy', './test/edge_cli_test.xml', 'edge_cli_test' ] )
+    cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', './test/edge_cli_test.xml', 'edge_cli_test' ] )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( list.match( /edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServers', 'deploy', './test/edge_cli_test.json', 'edge_cli_test' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', './test/edge_cli_test.json', 'edge_cli_test' ] );
       } )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( list.match( /edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServers', 'delete', 'edge_cli_test' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'delete', 'edge_cli_test' ] );
       } )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServers', 'list' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( !list.match( /edge_cli_test/ ) );
@@ -86,20 +86,20 @@ describe( 'The Edge CLI', function () {
 
   it( 'should manage resources', function ( done ) {
 
-    cli.dispatch( [ 'edge', account, 'resources', 'deploy', './test/edge_cli_test.jsc', 'jsc/edge_cli_test.js' ] )
+    cli.dispatch( [ 'edge', account, 'resource', 'deploy', './test/edge_cli_test.jsc', 'jsc/edge_cli_test.js' ] )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'resources', 'list' ] );
+        return cli.dispatch( [ 'edge', account, 'resource', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( list.match( /jsc\/edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'resources', 'delete', 'jsc/edge_cli_test.js' ] );
+        return cli.dispatch( [ 'edge', account, 'resource', 'delete', 'jsc/edge_cli_test.js' ] );
       } )
       .then( ok )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'resources', 'list' ] );
+        return cli.dispatch( [ 'edge', account, 'resource', 'list' ] );
       } )
       .then( function ( list ) {
         assert.ok( !list.match( /jsc\/edge_cli_test/ ) );
@@ -112,7 +112,7 @@ describe( 'The Edge CLI', function () {
 
     it( 'should report a missing org', function ( done ) {
 
-      cli.dispatch( [ 'edge', 'mrx', 'targetServers', 'list' ] )
+      cli.dispatch( [ 'edge', 'mrx', 'targetServer', 'list' ] )
         .then( not( done ), function ( err ) {
           assert.equal( err.message, 'Missing organization' );
         } )

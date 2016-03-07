@@ -12,6 +12,7 @@
     "edge": "./bin/edge"
   },
   "dependencies": {
+    "archiver": "^0.21.0",
     "debug": "^2.2.0",
     "lodash": "^4.6.1",
     "object-assign": "^4.0.1",

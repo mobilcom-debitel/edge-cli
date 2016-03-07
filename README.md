@@ -11,44 +11,53 @@ to make `edge` available in your PATH.
 ## Synopsis
 
 ```
-// writes config to a .edge config file (working directory)
-// you can also export EDGE_URL, EDGE_USER, EDGE_PASSWORD
-// NOTE: Remember to add .edge to your .gitignore
-edge config url <baseUrl>
-edge config user <user>
-edge config password <password>
+// create/configure account
+// config is written to .edge in your home directory
+// do this once for every combination you're using
+edge <account> config set url <url>
+edge <account> config set user <user>
+edge <account> config set password <password>
+edge <account> config set org <org>
+edge <account> config set env <env>
 
-// organization resource files
-edge o/<org>/r
-edge o/<org>/r/<type>
-edge o/<org>/r/<type>/<name>
-edge o/<org>/r/<type>/<name> upload <source>
-edge o/<org>/r/<type>/<name> delete
+// manage resources using account
+edge <account> resource list
+edge <account> resource get <type>/<name>
+edge <account> resource deploy <source> <type>/<name>
+edge <account> resource delete <type>/<name>
 
-// environment resource files
-edge o/<org>/e/<env>/r
-edge o/<org>/e/<env>/r/<type>/<name>
-edge o/<org>/e/<env>/r/<type>/<name> upload <source>
-edge o/<org>/e/<env>/r/<type>/<name> delete
+// manage target servers using account
+edge <account> targetServer list
+edge <account> targetServer get <name>
+edge <account> targetServer deploy <source> <name>
+edge <account> targetServer delete <name>
 
-// environment target servers
-edge o/<org>/e/<env>/t
-edge o/<org>/e/<env>/t/<name>
-edge o/<org>/e/<env>/t/<name> upload <source> // source may be .xml or .json
-edge o/<org>/e/<env>/t/<name> delete
+// manage proxies using account
+// <source> is a path to a proxy bundle
+// <name> is the API proxy name
+
+// validate proxy bundle
+edge <account> proxy validate <source> <name>
+
+// undeploy existing revision
+// upload <source> as new revision
+// deploy new revision
+edge <account> proxy deploy <source> <name>
 ```
 
 ## Examples
 
 ```
 // this is the base management api url for the test environment
-edge config url http://apiproxy-admin-test:8080
+edge test config set url http://apiproxy-admin-test:8080
+edge test config set org md
+edge test config set env test-online
 
 // to get the target servers of organization 'md' and environment 'test-online'
-edge o/md/e/test-online/t
+edge test targetServer list
 
 // to create a new target server
-edge o/md/e/test-online/t/GEN_CHATHISTORY_0 upload gen_chathistory_0.json
+edge test-online targetServer deploy gen_chathistory_0.json GEN_CHATHISTORY_0
 
 // with gen_chathistory_0.json being
 {
@@ -70,9 +79,9 @@ See [Load balancing across backend servers (Apigee)]( http://docs.apigee.com/doc
 
 ## Tests
 
-To run the tests you need a real (dev) config set up using `edge config ...`.
+To run the tests you need a real (dev) config set up using `edge <account> config set ...`.
 You have to export `EDGE_CLI_TEST` when running the tests:
 
 ```
-EDGE_CLI_TEST=o/md/e/dev-online npm test
+EDGE_CLI_TEST=<account> npm test
 ```
