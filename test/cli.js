@@ -52,7 +52,7 @@ describe( 'The Edge CLI', function () {
 
   it( 'should manage target servers', function ( done ) {
 
-    cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', './test/edge_cli_test.xml', 'edge_cli_test' ] )
+    cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', 'test/edge_cli_test.xml', 'edge_cli_test' ] )
       .then( ok )
       .then( function () {
         return cli.dispatch( [ 'edge', account, 'targetServer', 'list' ] );
@@ -61,7 +61,7 @@ describe( 'The Edge CLI', function () {
         assert.ok( list.match( /edge_cli_test/ ) );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', './test/edge_cli_test.json', 'edge_cli_test' ] );
+        return cli.dispatch( [ 'edge', account, 'targetServer', 'deploy', 'test/edge_cli_test.json', 'edge_cli_test' ] );
       } )
       .then( ok )
       .then( function () {
@@ -86,7 +86,7 @@ describe( 'The Edge CLI', function () {
 
   it( 'should manage resources', function ( done ) {
 
-    cli.dispatch( [ 'edge', account, 'resource', 'deploy', './test/edge_cli_test.jsc', 'jsc/edge_cli_test.js' ] )
+    cli.dispatch( [ 'edge', account, 'resource', 'deploy', 'test/edge_cli_test.jsc', 'jsc/edge_cli_test.js' ] )
       .then( ok )
       .then( function () {
         return cli.dispatch( [ 'edge', account, 'resource', 'list' ] );
@@ -104,6 +104,17 @@ describe( 'The Edge CLI', function () {
       .then( function ( list ) {
         assert.ok( !list.match( /jsc\/edge_cli_test/ ) );
       } )
+      .then( done, done );
+
+  } );
+
+  it( 'should deploy a proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', account, 'proxy', 'validate', 'test/apiproxy', 'edge_cli_test' ] )
+      .then( function () {
+        return cli.dispatch( [ 'edge', account, 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] );
+      } )
+      .then( ok )
       .then( done, done );
 
   } );
