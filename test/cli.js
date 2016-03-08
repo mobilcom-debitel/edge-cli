@@ -148,7 +148,7 @@ describe( 'The Edge CLI', function () {
   } );
 
   function ok( output ) {
-    assert.equal( output, 'OK' );
+    assert.ok( output.ok );
   }
 
   function not( done ) {

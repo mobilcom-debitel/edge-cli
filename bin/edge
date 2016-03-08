@@ -6,6 +6,6 @@ cli.dispatch( process.argv ).then( function ( output ) {
   console.log( output );
 } ).catch( function ( err ) {
   console.error( err.message );
-  console.error( cli.usage() );
+  console.error( err.payload );
   process.exit( 1 );
 } );
