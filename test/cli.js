@@ -8,7 +8,8 @@ describe( 'The Edge CLI', function () {
 
   var account = process.env.EDGE_CLI_TEST;
 
-  this.timeout( 20000 ); // dafuq apigee
+  // dafuq apigee
+  this.timeout( 20000 );
 
   it( 'should report a missing action', function ( done ) {
 
@@ -153,6 +154,14 @@ describe( 'The Edge CLI', function () {
       .then( function () {
         return cli.dispatch( [ 'edge', account, 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] );
       } )
+      .then( ok )
+      .then( done, done );
+
+  } );
+
+  it( 'should update a proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', account, 'proxy', 'update', 'test/apiproxy', 'edge_cli_test' ] )
       .then( ok )
       .then( done, done );
 

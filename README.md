@@ -39,7 +39,7 @@ edge <account> targetServer delete <name>
 edge <account> proxy validate <source> <name>
 
 // overwrite currently deployed revision with <source> and deploy
-// only do this in development environments
+// WARNING: only do this in development environments
 edge <account> proxy update <source> <name>
 
 // undeploy existing revision
