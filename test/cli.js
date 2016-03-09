@@ -15,7 +15,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account name' );
+        assert.equal( err.message, 'Invalid action' );
       } )
       .then( done, done );
 
@@ -25,7 +25,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account name' );
+        assert.equal( err.message, 'Invalid action' );
       } )
       .then( done, done );
 
@@ -35,7 +35,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'node', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account name' );
+        assert.equal( err.message, 'Invalid action' );
       } )
       .then( done, done );
 
@@ -45,7 +45,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'C:\\foo\\bar\\node.exe', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account name' );
+        assert.equal( err.message, 'Invalid action' );
       } )
       .then( done, done );
 
