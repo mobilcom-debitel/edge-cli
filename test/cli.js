@@ -14,7 +14,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account' );
+        assert.equal( err.message, 'Missing account name' );
       } )
       .then( done, done );
 
@@ -24,7 +24,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account' );
+        assert.equal( err.message, 'Missing account name' );
       } )
       .then( done, done );
 
@@ -34,7 +34,7 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'node', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account' );
+        assert.equal( err.message, 'Missing account name' );
       } )
       .then( done, done );
 
@@ -44,7 +44,46 @@ describe( 'The Edge CLI', function () {
 
     cli.dispatch( [ 'C:\\foo\\bar\\node.exe', 'edge' ] )
       .then( not( done ), function ( err ) {
-        assert.equal( err.message, 'Missing account' );
+        assert.equal( err.message, 'Missing account name' );
+      } )
+      .then( done, done );
+
+  } );
+
+  it( 'should manage accounts', function ( done ) {
+
+    cli.dispatch( [ 'edge', 'account', 'set', 'mocha', 'a', 'b', 'c', 'd', 'e' ] )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'get', 'mocha' ] );
+      } )
+      .then( function ( account ) {
+        assert.deepEqual( account, {
+          url: 'a',
+          user: 'b',
+          password: 'c',
+          org: 'd',
+          env: 'e'
+        } );
+      } )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'remove', 'mocha' ] );
+      } )
+      .then( ok )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'get', 'mocha' ] );
+      } )
+      .then( function ( account ) {
+        assert.equal( account, undefined );
+      } ).then( done, done );
+
+  } );
+
+  it( 'should report an unknown account', function ( done ) {
+
+    cli.dispatch( [ 'edge', 'unk', 'targetServer', 'list' ] )
+      .then( not( done ), function ( err ) {
+        assert.equal( err.message, 'Unknown account' );
       } )
       .then( done, done );
 
@@ -116,34 +155,6 @@ describe( 'The Edge CLI', function () {
       } )
       .then( ok )
       .then( done, done );
-
-  } );
-
-  describe( '(with mock account)', function () {
-
-    it( 'should report a missing org', function ( done ) {
-
-      cli.dispatch( [ 'edge', 'mrx', 'targetServer', 'list' ] )
-        .then( not( done ), function ( err ) {
-          assert.equal( err.message, 'Missing organization' );
-        } )
-        .then( done, done );
-
-    } );
-
-    it( 'should configure', function ( done ) {
-
-      cli.dispatch( [ 'edge', 'mocha', 'config', 'set', 'url', 'foo' ] )
-        .then( ok )
-        .then( function () {
-          return cli.dispatch( [ 'edge', 'mocha', 'config', 'get', 'url' ] );
-        } )
-        .then( function ( url ) {
-          assert.equal( url, 'foo' );
-        } )
-        .then( done, done );
-
-    } );
 
   } );
 

@@ -2,7 +2,7 @@
   "name": "edge-cli",
   "version": "0.1.0",
   "description": "Apigee Edge Command Line Interface",
-  "main": "cli.js",
+  "main": "index.js",
   "scripts": {
     "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test"
   },
@@ -15,9 +15,10 @@
     "archiver": "^0.21.0",
     "debug": "^2.2.0",
     "lodash": "^4.6.1",
-    "object-assign": "^4.0.1",
+    "minimist": "^1.2.0",
     "q": "^1.4.1",
-    "request": "^2.67.0"
+    "request": "^2.67.0",
+    "traverse": "^0.6.6"
   },
   "devDependencies": {
     "istanbul": "^0.4.2",

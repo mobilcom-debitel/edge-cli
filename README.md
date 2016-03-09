@@ -11,33 +11,36 @@ to make `edge` available in your PATH.
 ## Synopsis
 
 ```
-// create/configure account
+// create/configure accounts
 // config is written to .edge in your home directory
 // do this once for every combination you're using
-edge <account> config set url <url>
-edge <account> config set user <user>
-edge <account> config set password <password>
-edge <account> config set org <org>
-edge <account> config set env <env>
+edge account list
+edge account create <name> <url> <user> <password> <org> <env>
+edge account set <name> <url> <user> <password> <org> <env>
+edge account remove <name>
 
-// manage resources using account
+// manage resources
 edge <account> resource list
 edge <account> resource get <type>/<name>
 edge <account> resource deploy <source> <type>/<name>
 edge <account> resource delete <type>/<name>
 
-// manage target servers using account
+// manage target servers
 edge <account> targetServer list
 edge <account> targetServer get <name>
 edge <account> targetServer deploy <source> <name>
 edge <account> targetServer delete <name>
 
-// manage proxies using account
+// manage proxies
 // <source> is a path to a proxy bundle
 // <name> is the API proxy name
 
 // validate proxy bundle
 edge <account> proxy validate <source> <name>
+
+// overwrite currently deployed revision with <source> and deploy
+// only do this in development environments
+edge <account> proxy update <source> <name>
 
 // undeploy existing revision
 // upload <source> as new revision
@@ -49,12 +52,10 @@ edge <account> proxy deploy <source> <name>
 
 ```
 // this is the base management api url for the test environment
-edge test config set url http://apiproxy-admin-test:8080
-edge test config set org md
-edge test config set env test-online
+edge account create test http://apiproxy-admin-test:8080 user@md.de secret md test-online
 
 // to get the target servers of organization 'md' and environment 'test-online'
-edge test targetServer list
+edge test-online targetServer list
 
 // to create a new target server
 edge test-online targetServer deploy gen_chathistory_0.json GEN_CHATHISTORY_0
@@ -79,7 +80,7 @@ See [Load balancing across backend servers (Apigee)]( http://docs.apigee.com/doc
 
 ## Tests
 
-To run the tests you need a real (dev) config set up using `edge <account> config set ...`.
+To run the tests you need a real (dev) config set up using `edge account create ...`.
 You have to export `EDGE_CLI_TEST` when running the tests:
 
 ```

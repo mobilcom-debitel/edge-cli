@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
 var cli = require( '../' );
+var traverse = require( 'traverse' );
 
 cli.dispatch( process.argv ).then( function ( output ) {
-  console.log( output );
+  console.log( traverse( output ).map( function ( object ) {
+    if ( object.password ) object.password = '<hidden>';
+  } ) );
 } ).catch( function ( err ) {
   console.error( err.message );
-  console.error( err.payload );
+  if ( err.payload ) console.error( err.payload );
   process.exit( 1 );
 } );
