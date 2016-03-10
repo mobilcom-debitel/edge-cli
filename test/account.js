@@ -22,7 +22,7 @@ describe( 'The account controller', function () {
         } );
       } )
       .then( function () {
-        return cli.dispatch( [ 'edge', 'account', 'remove', 'mocha' ] );
+        return cli.dispatch( [ 'edge', 'account', 'delete', 'mocha' ] );
       } )
       .then( describe.ok )
       .then( function () {

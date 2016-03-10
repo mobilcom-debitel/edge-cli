@@ -1,12 +1,11 @@
 # Apigee Edge Command Line Interface
 
 A CLI with support for features missing in the Edge UI like managing
-organization/environment resource files and target servers.
+environment resource files and target servers.
 
 ## Installation
 
-Clone this repo and run `npm install . -g`
-to make `edge` available in your PATH.
+`npm install git+https://git@stashweb.mobilcom.de/scm/api/edge-cli.git -g`
 
 ## Synopsis
 
@@ -17,25 +16,27 @@ to make `edge` available in your PATH.
 edge account list
 edge account create <name> <url> <user> <password> <org> <env>
 edge account set <name> <url> <user> <password> <org> <env>
-edge account remove <name>
+edge account delete <name>
 
 // manage resources
+// <source> is a path to a resource file
 edge <account> resource list
 edge <account> resource get <type>/<name>
 edge <account> resource deploy <source> <type>/<name>
 edge <account> resource delete <type>/<name>
 
 // manage target servers
+// <source> is a path to a xml or json target server
 edge <account> targetServer list
 edge <account> targetServer get <name>
 edge <account> targetServer deploy <source> <name>
 edge <account> targetServer delete <name>
 
 // manage proxies
-// <source> is a path to a proxy bundle
+// <source> is a path to a proxy bundle directory (edge-cli will zip for you)
 // <name> is the API proxy name
 
-// validate proxy bundle
+// validate proxy
 edge <account> proxy validate <source> <name>
 
 // overwrite currently deployed revision with <source> and deploy
@@ -51,13 +52,13 @@ edge <account> proxy deploy <source> <name>
 ## Examples
 
 ```
-// this is the base management api url for the test environment
+// basic configuration
 edge account create test http://apiproxy-admin-test:8080 user@md.de secret md test-online
 
-// to get the target servers of organization 'md' and environment 'test-online'
+// list target servers of organization 'md' and environment 'test-online'
 edge test-online targetServer list
 
-// to create a new target server
+// deploy a target server
 edge test-online targetServer deploy gen_chathistory_0.json GEN_CHATHISTORY_0
 
 // with gen_chathistory_0.json being
@@ -80,7 +81,7 @@ See [Load balancing across backend servers (Apigee)]( http://docs.apigee.com/doc
 
 ## Tests
 
-To run the tests you need a real (dev) config set up using `edge account create ...`.
+To run the tests you need a real (dev) account set up using `edge account create ...`.
 You have to export `EDGE_CLI_TEST` when running the tests:
 
 ```

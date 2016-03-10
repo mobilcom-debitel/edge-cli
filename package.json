@@ -2,6 +2,7 @@
   "name": "edge-cli",
   "version": "0.1.0",
   "description": "Apigee Edge Command Line Interface",
+  "repository": "https://stashweb.mobilcom.de/projects/API/repos/edge-cli/browse",
   "main": "index.js",
   "scripts": {
     "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test"
