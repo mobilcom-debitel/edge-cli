@@ -10,6 +10,18 @@ describe( 'The account controller', function () {
     cli.dispatch( [ 'edge', 'account', 'set', 'mocha', 'a', 'b', 'c', 'd', 'e' ] )
       .then( describe.ok )
       .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'list' ] );
+      } )
+      .then( function ( accounts ) {
+        assert.deepEqual( accounts.mocha, {
+          url: 'a',
+          user: 'b',
+          password: 'c',
+          org: 'd',
+          env: 'e'
+        } );
+      } )
+      .then( function () {
         return cli.dispatch( [ 'edge', 'account', 'get', 'mocha' ] );
       } )
       .then( function ( account ) {
@@ -20,6 +32,13 @@ describe( 'The account controller', function () {
           org: 'd',
           env: 'e'
         } );
+      } )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'create', 'mocha', 'a', 'b', 'c', 'd' ] );
+      } )
+      .then( describe.not( done ) )
+      .catch( function ( err ) {
+        assert.ok( err.message.match( /Missing one of/ ) );
       } )
       .then( function () {
         return cli.dispatch( [ 'edge', 'account', 'delete', 'mocha' ] );

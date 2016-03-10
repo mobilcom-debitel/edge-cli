@@ -1,0 +1,5 @@
+<TargetServer name="edge_cli_test">
+  <Host>google.com</Host>
+  <Port>80</Port>
+  <IsEnabled>false</IsEnabled>
+</TargetServerZ>
