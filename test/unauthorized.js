@@ -8,7 +8,7 @@ describe( 'Using invalid credentials;', function () {
 
   this.timeout( 20000 );
 
-  before( function () {
+  before( function ( done ) {
     cli.dispatch( [ 'edge', 'account', 'get', describe.account ] )
       .then( function ( account ) {
         return cli.dispatch( [ 'edge', 'account', 'create',
@@ -20,7 +20,8 @@ describe( 'Using invalid credentials;', function () {
           account.env
         ] );
       } )
-      .then( describe.ok );
+      .then( describe.ok )
+      .then( done, done );
   } );
 
   it( 'the resource controller should report 401', function ( done ) {
