@@ -1,5 +1,6 @@
 var assert = require( 'assert' );
 var cli = require( '../' );
+var debug = require( 'debug' )( 'edge-cli:test:unauthorized' );
 
 require( './suite' );
 
@@ -26,6 +27,7 @@ describe( 'Using invalid credentials;', function () {
 
      cli.dispatch( [ 'edge', 'mocha-invalid', 'resource', 'list' ] )
       .then( describe.not( done ), function ( err ) {
+        debug( err.message );
         assert.ok( err.message.match( /401/ ) );
       } )
       .then( done, done );
