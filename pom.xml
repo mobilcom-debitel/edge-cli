@@ -11,7 +11,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.language>js</sonar.language>
-    <sonar.sources>index.js,lib,test</sonar.sources>
+    <sonar.sources>index.js,lib</sonar.sources>
     <sonar.javascript.jstestdriver.reportsPath>reports</sonar.javascript.jstestdriver.reportsPath>
     <sonar.javascript.lcov.reportPath>coverage/lcov.info</sonar.javascript.lcov.reportPath>
   </properties>
