@@ -3,12 +3,11 @@ var cli = require( '../' );
 
 require( './suite' );
 
-describe( 'Any controller', function () {
+describe( 'Using invalid credentials;', function () {
 
   this.timeout( 20000 );
 
-  it( 'should report 401 if using invalid credentials', function ( done ) {
-
+  before( function () {
     cli.dispatch( [ 'edge', 'account', 'get', describe.account ] )
       .then( function ( account ) {
         return cli.dispatch( [ 'edge', 'account', 'create',
@@ -20,14 +19,36 @@ describe( 'Any controller', function () {
           account.env
         ] );
       } )
-      .then( describe.ok )
-      .then( function () {
-        return cli.dispatch( [ 'edge', 'mocha-invalid', 'resource', 'list' ] );
-      } )
+      .then( describe.ok );
+  } );
+
+  it( 'the resource controller should report 401', function ( done ) {
+
+     cli.dispatch( [ 'edge', 'mocha-invalid', 'resource', 'list' ] )
       .then( describe.not( done ), function ( err ) {
         assert.ok( err.message.match( /401/ ) );
-        done();
-      } );
+      } )
+      .then( done, done );
+
+  } );
+
+  it( 'the proxy controller should report 401', function ( done ) {
+
+     cli.dispatch( [ 'edge', 'mocha-invalid', 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] )
+      .then( describe.not( done ), function ( err ) {
+        assert.ok( err.message.match( /401/ ) );
+      } )
+      .then( done, done );
+
+  } );
+
+  it( 'the targetServer controller should report 401', function ( done ) {
+
+     cli.dispatch( [ 'edge', 'mocha-invalid', 'targetServer', 'list' ] )
+      .then( describe.not( done ), function ( err ) {
+        assert.ok( err.message.match( /401/ ) );
+      } )
+      .then( done, done );
 
   } );
 
