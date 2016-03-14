@@ -7,7 +7,7 @@ describe( 'The account controller', function () {
 
   it( 'should manage accounts', function ( done ) {
 
-    cli.dispatch( [ 'edge', 'account', 'set', 'mocha', 'a', 'b', 'c', 'd', 'e' ] )
+    cli.dispatch( [ 'edge', 'account', 'create', 'mocha', 'a', 'b', 'c', 'd', 'e' ] )
       .then( describe.ok )
       .then( function () {
         return cli.dispatch( [ 'edge', 'account', 'list' ] );
@@ -39,6 +39,21 @@ describe( 'The account controller', function () {
       .then( describe.not( done ) )
       .catch( function ( err ) {
         assert.ok( err.message.match( /Missing one of/ ) );
+      } )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'set', 'mocha', 'user', 'x' ] );
+      } )
+      .then( function () {
+        return cli.dispatch( [ 'edge', 'account', 'get', 'mocha' ] );
+      } )
+      .then( function ( account ) {
+        assert.deepEqual( account, {
+          url: 'a',
+          user: 'x',
+          password: 'c',
+          org: 'd',
+          env: 'e'
+        } );
       } )
       .then( function () {
         return cli.dispatch( [ 'edge', 'account', 'delete', 'mocha' ] );

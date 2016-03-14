@@ -15,7 +15,7 @@ environment resource files and target servers.
 // do this once for every combination you're using
 edge account list
 edge account create <name> <url> <user> <password> <org> <env>
-edge account set <name> <url> <user> <password> <org> <env>
+edge account set <name> url|user|password|org|env <value>
 edge account delete <name>
 
 // manage resources
