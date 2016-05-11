@@ -3,3 +3,4 @@ coverage
 reports
 .edge
 npm-debug.log
+test/redeploy.json

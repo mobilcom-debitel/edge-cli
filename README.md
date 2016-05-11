@@ -43,13 +43,18 @@ edge <account> proxy validate <source> <name>
 // WARNING: only do this in development environments
 edge <account> proxy update <source> <name>
 
-// undeploy existing revision
+// undeploy existing revision(s)
 // upload <source> as new revision
 // deploy new revision
 edge <account> proxy deploy <source> <name>
 
-// undeploy existing revision
+// undeploy existing revision(s)
 edge <account> proxy undeploy <name>
+
+// undeploy, write undeployed revisions to a file, and redeploy original revisions
+// useful for undeploying a proxy temporarily, e.g. for maintenance
+edge <account> proxy undeploy <name> redeploy.json // writes to redeploy.json
+edge <account> proxy redeploy <name> redeploy.json // reads from redeploy.json
 ```
 
 ## Examples
