@@ -47,6 +47,9 @@ edge <account> proxy update <source> <name>
 // upload <source> as new revision
 // deploy new revision
 edge <account> proxy deploy <source> <name>
+
+// undeploy existing revision
+edge <account> proxy undeploy <name>
 ```
 
 ## Examples

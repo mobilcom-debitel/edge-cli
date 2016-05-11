@@ -13,7 +13,6 @@
     <HTTPProxyConnection>
         <BasePath>/edge_cli_test</BasePath>
         <VirtualHost>default</VirtualHost>
-        <VirtualHost>secure</VirtualHost>
     </HTTPProxyConnection>
     <RouteRule name="default">
         <TargetEndpoint>default</TargetEndpoint>

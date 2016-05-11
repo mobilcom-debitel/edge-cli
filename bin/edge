@@ -5,7 +5,7 @@ var traverse = require( 'traverse' );
 
 cli.dispatch( process.argv ).then( function ( output ) {
   console.log( traverse( output ).map( function ( object ) {
-    if ( object.password ) object.password = '<hidden>';
+    if ( object && object.password ) object.password = '<hidden>';
   } ) );
 } ).catch( function ( err ) {
   console.error( err.message );

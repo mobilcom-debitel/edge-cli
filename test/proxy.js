@@ -8,6 +8,25 @@ describe( 'The proxy controller', function () {
 
   this.timeout( 8000 );
 
+  it( 'should deploy a proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'validate', 'test/apiproxy', 'edge_cli_test' ] )
+      .then( function () {
+        return cli.dispatch( [ 'edge', describe.account, 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] );
+      } )
+      .then( describe.ok )
+      .then( done, done );
+
+  } );
+
+  it( 'should update a proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'update', 'test/apiproxy', 'edge_cli_test' ] )
+      .then( describe.ok )
+      .then( done, done );
+
+  } );
+
   it( 'should report an error when the proxy directory is invalid (deploy)', function ( done ) {
 
     cli.dispatch( [ 'edge', describe.account, 'proxy', 'deploy', 'unknown', 'edge_cli_test' ] )
@@ -29,22 +48,25 @@ describe( 'The proxy controller', function () {
 
   } );
 
-  it( 'should deploy a proxy', function ( done ) {
+  it( 'should undeploy a proxy and return the undeployed revisions', function ( done ) {
 
-    cli.dispatch( [ 'edge', describe.account, 'proxy', 'validate', 'test/apiproxy', 'edge_cli_test' ] )
-      .then( function () {
-        return cli.dispatch( [ 'edge', describe.account, 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] );
-      } )
-      .then( describe.ok )
-      .then( done, done );
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'undeploy', 'edge_cli_test' ] )
+      .then( function ( result ) {
+        debug( result );
+        assert.ok( result.revisions.length > 0 );
+        done();
+      } );
 
   } );
 
-  it( 'should update a proxy', function ( done ) {
+  it( 'should not fail when undeploying an undeployed proxy', function ( done ) {
 
-    cli.dispatch( [ 'edge', describe.account, 'proxy', 'update', 'test/apiproxy', 'edge_cli_test' ] )
-      .then( describe.ok )
-      .then( done, done );
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'undeploy', 'edge_cli_test' ] )
+      .then( function ( result ) {
+        debug( result );
+        assert.equal( result.revisions.length, 0 );
+        done();
+      } );
 
   } );
 
