@@ -55,6 +55,9 @@ edge <account> proxy undeploy <name>
 // useful for undeploying a proxy temporarily, e.g. for maintenance
 edge <account> proxy undeploy <name> redeploy.json // writes to redeploy.json
 edge <account> proxy redeploy <name> redeploy.json // reads from redeploy.json
+
+// completely remove a proxy
+edge <account> proxy remove <name>
 ```
 
 ## Examples

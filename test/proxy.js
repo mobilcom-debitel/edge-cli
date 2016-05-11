@@ -16,10 +16,6 @@ describe( 'The proxy controller', function () {
       .then( function () {
         return cli.dispatch( [ 'edge', describe.account, 'proxy', 'deploy', 'test/apiproxy', 'edge_cli_test' ] );
       } )
-      .then( function ( x ) {
-        debug( x );
-        return x;
-      } )
       .then( describe.ok )
       .then( done, done );
 
@@ -106,6 +102,48 @@ describe( 'The proxy controller', function () {
         debug( result );
         assert.deepEqual( result, { revisions: [] } );
       } )
+      .then( done, done );
+
+  } );
+
+  it( 'should require a proxy name when deleting', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'remove' ] )
+      .then( describe.not( done ), function ( err ) {
+        assert.equal( err.message, 'Missing proxy' );
+      } )
+      .then( done, done );
+
+  } );
+
+  it( 'should remove a proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'remove', 'edge_cli_test' ] )
+      .then( describe.ok )
+      .then( done, done );
+
+  } );
+
+  it( 'should deploy a proxy instead of trying to update a non-existing proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'update', 'test/apiproxy', 'edge_cli_test' ] )
+      .then( describe.ok )
+      .then( done, done );
+
+  } );
+
+  it( 'should remove a proxy (2)', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'remove', 'edge_cli_test' ] )
+      .then( describe.ok )
+      .then( done, done );
+
+  } );
+
+  it( 'should remove a non-existing proxy', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'remove', 'edge_cli_test' ] )
+      .then( describe.ok )
       .then( done, done );
 
   } );
