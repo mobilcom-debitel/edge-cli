@@ -77,6 +77,17 @@ describe( 'The proxy controller', function () {
 
   } );
 
+  it( 'should redeploy an already deployed proxy and return the redeployed revisions', function ( done ) {
+
+    cli.dispatch( [ 'edge', describe.account, 'proxy', 'redeploy', 'edge_cli_test', 'test/redeploy.json' ] )
+      .then( function ( result ) {
+        debug( result );
+        assert.deepEqual( result, redeployData );
+      } )
+      .then( done, done );
+
+  } );
+
   it( 'should undeploy a proxy and return the undeployed revisions (2)', function ( done ) {
 
     cli.dispatch( [ 'edge', describe.account, 'proxy', 'undeploy', 'edge_cli_test' ] )
