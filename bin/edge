@@ -8,7 +8,9 @@ cli.dispatch( process.argv ).then( function ( output ) {
     if ( object && object.password ) object.password = '<hidden>';
   } ) );
 } ).catch( function ( err ) {
-  console.error( err.message );
-  if ( err.payload ) console.error( err.payload );
+  console.error( {
+    error: err.message,
+    payload: err.payload
+  } );
   process.exit( 1 );
 } );

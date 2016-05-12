@@ -10,6 +10,9 @@ environment resource files and target servers.
 ## Synopsis
 
 ```
+// show version
+edge version
+
 // create/configure accounts
 // config is written to .edge in your home directory
 // do this once for every combination you're using
