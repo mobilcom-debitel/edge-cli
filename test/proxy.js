@@ -6,7 +6,7 @@ require( './suite' );
 
 describe( 'The proxy controller', function () {
 
-  this.timeout( 8000 );
+  this.timeout( 20000 );
 
   var deployData;
 

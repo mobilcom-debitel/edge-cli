@@ -5,7 +5,6 @@ require( './suite' );
 
 describe( 'The Edge CLI', function () {
 
-  // dafuq apigee
   this.timeout( 20000 );
 
   it( 'should report a missing action', function ( done ) {
