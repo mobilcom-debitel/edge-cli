@@ -1,3 +1,4 @@
+set -e
 npm install
 mkdir -p reports
 EDGE_CLI_CONF=.edge node bin/edge account create $bamboo_account $bamboo_url $bamboo_user $bamboo_password $bamboo_org $bamboo_env
