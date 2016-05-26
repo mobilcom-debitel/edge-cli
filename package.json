@@ -1,6 +1,6 @@
 {
   "name": "edge-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Apigee Edge Command Line Interface",
   "repository": "https://stashweb.mobilcom.de/projects/API/repos/edge-cli/browse",
   "main": "index.js",
