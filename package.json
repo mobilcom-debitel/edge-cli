@@ -8,7 +8,7 @@
     "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test"
   },
   "author": "Morris Brodersen",
-  "license": "ISC",
+  "license": "",
   "bin": {
     "edge": "./bin/edge"
   },
@@ -25,5 +25,8 @@
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "xunit-file": "0.0.9"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory.mobilcom.de/artifactory/api/npm/md-npm"
   }
 }

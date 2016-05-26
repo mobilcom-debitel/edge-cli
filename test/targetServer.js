@@ -5,7 +5,7 @@ require( './suite' );
 
 describe( 'The targetServer controller', function () {
 
-  this.timeout( 20000 );
+  this.timeout( 50000 );
 
   it( 'should manage target servers', function ( done ) {
 
@@ -46,7 +46,7 @@ describe( 'The targetServer controller', function () {
     cli.dispatch( [ 'edge', describe.account, 'targetServer', 'deploy', 'test/edge_cli_test_invalid.json', 'edge_cli_test' ] )
       .then( describe.not( done ), function ( err ) {
         assert.equal( err.message, 'Status 400' );
-        assert.ok( err.payload.match( /was expecting double-quote/ ) );
+        assert.ok( JSON.stringify( err.payload ).match( /was expecting double-quote/ ) );
       } )
       .then( done, done );
 
