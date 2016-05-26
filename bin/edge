@@ -4,13 +4,15 @@ var cli = require( '../' );
 var traverse = require( 'traverse' );
 
 cli.dispatch( process.argv ).then( function ( output ) {
+  if ( typeof output === 'string' ) return console.log( output );
   console.log( traverse( output ).map( function ( object ) {
     if ( object && object.password ) object.password = '<hidden>';
   } ) );
 } ).catch( function ( err ) {
   console.error( {
     error: err.message,
-    payload: err.payload
+    payload: err.payload,
+    help: 'Try "edge help"'
   } );
   process.exit( 1 );
 } );

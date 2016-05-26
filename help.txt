@@ -1,15 +1,3 @@
-# Apigee Edge Command Line Interface
-
-A CLI with support for features missing in the Edge UI like managing
-environment resource files and target servers.
-
-## Installation
-
-`npm install git+https://git@stashweb.mobilcom.de/scm/api/edge-cli.git -g`
-
-## Synopsis
-
-```
 // show help
 edge help
 
@@ -64,43 +52,3 @@ edge <account> proxy redeploy <name> redeploy.json // reads from redeploy.json
 
 // completely remove a proxy
 edge <account> proxy remove <name>
-```
-
-## Examples
-
-```
-// basic configuration
-edge account create test http://apiproxy-admin-test:8080 user@md.de secret md test-online
-
-// list target servers of organization 'md' and environment 'test-online'
-edge test-online targetServer list
-
-// deploy a target server
-edge test-online targetServer deploy gen_chathistory_0.json GEN_CHATHISTORY_0
-
-// with gen_chathistory_0.json being
-{
-  "host" : "xxxx",
-  "isEnabled" : false,
-  "name" : "GEN_CHATHISTORY_0",
-  "port" : 9000
-}
-
-// xml works as well
-<TargetServer name="GEN_CHATHISTORY_0">
-  <Host>xxxx</Host>
-  <Port>9000</Port>
-  <IsEnabled>false</IsEnabled>
-</TargetServer>
-```
-
-See [Load balancing across backend servers (Apigee)]( http://docs.apigee.com/docs/api-services/content/api-services/content/load-balancing-across-backend-servers) for details on target servers.
-
-## Tests
-
-To run the tests you need a real (dev) account set up using `edge account create ...`.
-You have to export `EDGE_CLI_TEST` when running the tests:
-
-```
-EDGE_CLI_TEST=<account> npm test
-```
