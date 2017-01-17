@@ -2,7 +2,7 @@
   "name": "edge-cli",
   "version": "1.0.0",
   "description": "Apigee Edge Command Line Interface",
-  "repository": "https://stashweb.mobilcom.de/projects/API/repos/edge-cli/browse",
+  "repository": "https://github.com/mobilcom-debitel/edge-cli",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
