@@ -1,0 +1,11 @@
+node_modules
+coverage
+reports
+.edge
+npm-debug.log
+test/redeploy.json
+test/*.zip
+test/apiproxy/resources/jsc/checksum.js
+test/apiproxy/resources/jsc/new.js
+test/apiproxy/resources/jsc/api.js
+test/apiproxy/policies/api.xml

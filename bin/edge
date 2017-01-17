@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+var cli = require( '../' );
+var traverse = require( 'traverse' );
+
+cli.dispatch( process.argv.slice( 2 ) ).then( function ( output ) {
+  if ( typeof output === 'string' ) return console.log( output );
+  console.log( traverse( output ).map( function ( object ) {
+    if ( object && object.password ) object.password = '<hidden>';
+  } ) );
+} ).catch( function ( err ) {
+  console.log( err.message );
+  if ( err.payload ) console.log( 'API response was:', err.payload.toString() );
+  console.log( 'Try "edge help"' );
+  process.exit( 1 );
+} );

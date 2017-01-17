@@ -1,0 +1,29 @@
+{
+  "name": "edge-cli",
+  "version": "0.5.0",
+  "description": "Apigee Edge Command Line Interface",
+  "repository": "https://stashweb.mobilcom.de/projects/API/repos/edge-cli/browse",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test"
+  },
+  "author": "Morris Brodersen <mb@morrisbrodersen.de> (http://morrisbrodersen.de)",
+  "bin": {
+    "edge": "./bin/edge"
+  },
+  "dependencies": {
+    "archiver": "^1.3.0",
+    "debug": "^2.6.0",
+    "glob": "^7.1.1",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
+    "request": "^2.79.0",
+    "swagger-parser": "^3.4.1",
+    "traverse": "^0.6.6"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
+  }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="edge_cli_test">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1455717206539</CreatedAt>
+    <CreatedBy>edge-cli-tes@edge-cli-test.com</CreatedBy>
+    <Description>EDGE CLI TEST</Description>
+    <DisplayName>edge_cli_test</DisplayName>
+    <LastModifiedAt>1456927136921</LastModifiedAt>
+    <LastModifiedBy>edge-cli-test@edge-cli-test.com</LastModifiedBy>
+    <Policies>
+        <Policy>test</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://test.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

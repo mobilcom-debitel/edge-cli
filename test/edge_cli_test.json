@@ -1,0 +1,6 @@
+{
+  "name": "edge_cli_test",
+  "host": "google.com",
+  "port": 80,
+  "isEnabled": false
+}
