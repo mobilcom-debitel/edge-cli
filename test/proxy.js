@@ -22,6 +22,16 @@ describe( 'The proxy controller', function () {
     return cleanup();
   } );
 
+  it( 'should require an account', function () {
+
+    return cli.dispatch( [ 'proxy', 'remove', 'edge_cli_test' ] )
+      .then( describe.fail )
+      .catch( function ( err ) {
+        assert.equal( err.message, 'Missing account' );
+      } );
+
+  } );
+
   it( 'should remove a proxy (0)', function () {
 
     return cli.dispatch( [ 'proxy', 'remove', 'edge_cli_test', '-a', describe.account ] )

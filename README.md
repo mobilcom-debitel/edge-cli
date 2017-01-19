@@ -25,14 +25,17 @@ edge version
 # Accounts are tuples of:
 # (URL to management API, Username, Password, Organization, Environment)
 #
-# Config is written to .edge in your home directory
-# You can specify a different file with EDGE_CLI_CONF=/my/.edge
 # Do this once for every combination you're using
 edge account list
-edge account setup <name> # interactive mode, new or existing accounts
-edge account setup <name> <url> <username> <password> <org> <env>
-edge account set <name> url|username|password|org|env <value>
-edge account delete <name>
+edge account setup <account-name> # interactive mode, new or existing accounts
+edge account setup <account-name> <url> <username> <password> <org> <env>
+edge account set <account-name> url|username|password|org|env <value>
+edge account delete <account-name>
+
+# Config (including accounts) is written to .edge in your home directory
+# You can select an alternate config file with -c or --config
+edge <command> -c /my/.edge
+edge <command> --config /my/.edge
 
 # Most commands require an apigee edge account
 # Specify the account name with -a or --account

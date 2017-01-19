@@ -7,6 +7,16 @@ describe( 'The targetServer controller', function () {
 
   this.timeout( 50000 );
 
+  it( 'should require an account', function () {
+
+    return cli.dispatch( [ 'targetServer', 'deploy', 'test/edge_cli_test.xml', 'edge_cli_test' ] )
+      .then( describe.fail )
+      .catch( function ( err ) {
+        assert.equal( err.message, 'Missing account' );
+      } );
+
+  } );
+
   it( 'should manage target servers', function ( done ) {
 
     cli.dispatch( [ 'targetServer', 'deploy', 'test/edge_cli_test.xml', 'edge_cli_test', '-a', describe.account ] )
