@@ -1,6 +1,6 @@
 {
   "name": "edge-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Apigee Edge Command Line Interface",
   "repository": "https://github.com/mobilcom-debitel/edge-cli",
   "license": "MIT",
