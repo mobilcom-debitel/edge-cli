@@ -10,7 +10,7 @@ cli.dispatch( process.argv.slice( 2 ) ).then( function ( output ) {
   } ) );
 } ).catch( function ( err ) {
   console.log( err.message );
-  if ( err.payload ) console.log( 'API response was:', JSON.stringify( err.payload ) );
+  if ( err.payload ) console.log( 'API response was:', JSON.stringify( err.payload, null, '  ' ) );
   console.log( 'Try "edge help"' );
   process.exit( 1 );
 } );
