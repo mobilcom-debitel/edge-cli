@@ -1,4 +1,4 @@
-# Apigee Edge Command Line Interface
+# Apigee Edge Command-Line Interface
 
 A CLI with support for features missing in the Edge UI like managing
 environment resource files and target servers as well as advanced proxy deployments.
