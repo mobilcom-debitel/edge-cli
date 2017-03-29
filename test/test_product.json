@@ -1,0 +1,16 @@
+{
+    "name": "edge-cli-test-product",
+    "displayName": "Test product from edge-cli",
+    "apiResources": ["/", "/**"],
+    "approvalType": "auto",
+    "attributes": [{
+        "name": "foo",
+        "value": "bar"
+    }],
+    "description": "Test-Produkt erzeugt und aktualisiert von der edge-cli",
+    "environments": ["dev"],
+    "proxies": [
+        "remoteproxy"
+    ],
+    "scopes": [""]
+}
