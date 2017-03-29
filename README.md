@@ -91,6 +91,10 @@ edge proxy remove <name>
 # <swagger> defaults to "swagger.yaml"
 # <target> defaults to "apiproxy"
 edge generate apiPolicy <swagger> <target>
+
+# Manage products
+edge product list
+edge product get <name>
 ```
 
 ## Examples
