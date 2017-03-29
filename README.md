@@ -91,6 +91,23 @@ edge proxy remove <name>
 # <swagger> defaults to "swagger.yaml"
 # <target> defaults to "apiproxy"
 edge generate apiPolicy <swagger> <target>
+
+#
+# Manage products
+#
+
+# List the names of all products
+edge product list
+
+# Get the details of a product
+edge product get <name>
+
+# Create or update a product.
+# The name of the product to be created or updated will be determined
+# from the attribute 'name' in the source.
+# The source must conform to the format defined in
+# http://docs.apigee.com/management/apis/post/organizations/%7Borg_name%7D/apiproducts
+edge product deploy <source>
 ```
 
 ## Examples
